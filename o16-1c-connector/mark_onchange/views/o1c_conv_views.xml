@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019-2022 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="conversions_form" model="ir.ui.view">
+        <field name="name">o1c.conv.form</field>
+        <field name="model">o1c.conv</field>
+        <field name="arch" type="xml">
+            <form string="Conversions">
+                <header>
+                    <button name="update_models_available" type="object" icon="fa-plug"
+                            attrs="{'invisible': ['|', ('id', '=', False), ('export_rule_ids', '=', [])]}"
+                            string="Setup export Rules"
+                            title="Update models availability in Export Rules and setup model tracking"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_changed_record)d"
+                                title="Records will be exported"
+                                context="{'search_default_conv_id': id, 'default_conv_id': id, 'search_default_groupby_conv_id': 0}"
+                                attrs="{'invisible': ['|', ('id', '=', False), ('export_rule_ids', '=', [])]}"
+                                type="action" icon="fa-list">
+                            <div class="o_form_field o_stat_info">
+                                <field name="changed_rec_count" class="o_stat_value"/>
+                                <span class="o_stat_text" > for export</span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="e.g. From Odoo to 1C:Зарплата"/></h1>
+                    </div>
+
+                    <notebook>
+                        <page name="p_export_rules" string="Export Rules">
+                            <field name="export_rule_ids" no_open="1">
+                                <tree decoration-danger="model_unavailable and not disabled"
+                                      decoration-muted="disabled"
+                                      default_order="order desc"
+                                      editable="bottom">
+                                    <field name="order" widget="handle"/>
+                                    <field name="model"/>
+                                    <field name="name"/>
+                                    <button name="add_model_action" type="object" icon="fa-list"
+                                            aria-label="Add export button"
+                                            title="Add export action to model view" class="float-right"
+                                            attrs="{'invisible': ['|', ('allow_add_model_action','=',False), ('model_unavailable','=',True)]}"/>
+                                    <button name="remove_model_action" type="object" icon="fa-remove"
+                                            aria-label="Remove export button"
+                                            title="Remove export action from model view" class="float-right"
+                                            attrs="{'invisible': [('model_export_action_exist', '=', False)]}"/>
+                                    <field name="allow_add_model_action" invisible="1"/>
+                                    <field name="model_export_action_exist" invisible="1"/>
+                                    <field name="disabled" invisible="1"/>
+                                    <field name="model_unavailable" invisible="1"/>
+                                    <control>
+                                        <create string="Add a new model"/>
+                                    </control>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="p_to_export" string="Records for export">
+                            <field name="changed_rec_ids" readonly="1"
+                                   options="{'no_create': True, 'no_open': True, 'no_create_edit': True, 'no_quick_create': True}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_o1c_conversions" model="ir.actions.act_window">
+        <field name="name">Conversions</field>
+        <field name="res_model">o1c.conv</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--Level 2-->
+    <menuitem id="menu_1c_conversions" name="Conversions" parent="menu_1c_conv_group"
+        action="action_o1c_conversions" sequence="1"/>
+
+</odoo>

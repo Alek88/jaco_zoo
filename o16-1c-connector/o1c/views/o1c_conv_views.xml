@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019-2022 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="conversions_form" model="ir.ui.view">
+        <field name="name">o1c.conv.form</field>
+        <field name="model">o1c.conv</field>
+        <field name="inherit_id" ref="mark_onchange.conversions_form"/>
+        <field name="arch" type="xml">
+            <button name="update_models_available" position="before">
+                <button name="%(o1c.upload_conv_wizard)d" type="action"
+                        string="Upload from file"
+                        class="oe_highlight"
+                        icon="fa-cloud-upload"
+                        context="{'default_conf_id': active_id}"
+                        title="Clear this Conversions and fill them from XML file"/>
+
+                <!-- TODO move this button into Action menu-->
+                <button name="export_data_to_1c" string="Export to 1C" type="object" groups="base.group_no_one"
+                        attrs="{'invisible': ['|', '|', ('id', '=', False), ('format_version', '=', False), ('o1c_uuid', '=', False)]}"
+                        icon="fa-download"/>
+            </button>
+            <notebook position="before">
+                <group>
+                    <group>
+                        <field name="source_name"/>
+                        <field name="destin_name"/>
+                    </group>
+                    <group>
+                        <field name="source_file_name" attrs="{'invisible': [('source_file_name', '=', False)]}"/>
+                        <field name="conv_upload_date" attrs="{'invisible': [('conv_upload_date', '=', False)]}"/>
+                    </group>
+                </group>
+            </notebook>
+            <notebook position="inside">
+                <page name="p_rules" string="Conversion Rules">
+                    <field name="rule_ids">
+                        <tree decoration-muted="disabled">
+                            <!-- TODO из-за того что в 1С правила лежат в разніх группах: Справочники и Документы  -->
+                            <!-- то они не имеют общей сквозной нумерации\порядок. У них порядок задается внутри группы  -->
+                            <!-- а в оду у нас сплошной список и из-за этого порядок не корректный.  -->
+<!--                            <field name="order" widget="handle"/>-->
+                            <field name="code"/>
+                            <field name="source_name"/>
+                            <field name="destin_name"/>
+                            <field name="order" />
+                            <field name="disabled" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+                <page name="p_other" string="Other Info">
+                    <group>
+                        <field name="o1c_uuid"/>
+                        <field name="format_version"/>
+                    </group>
+                </page>
+            </notebook>
+            <xpath expr="//field[@name='export_rule_ids']//tree//field[@name='name']" position="after">
+                <field name="code"/>
+                <field name="conv_rule_id"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

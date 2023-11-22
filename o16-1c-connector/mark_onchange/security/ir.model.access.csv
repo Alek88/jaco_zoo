@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_changed_record_user,changed.record.user,mark_onchange.model_changed_record,group_o1c_user,1,0,0,0
+access_changed_record_manager,changed.record.manager,mark_onchange.model_changed_record,group_o1c_manager,1,1,1,1
+
+access_o1c_conv_user,o1c.conv.user,model_o1c_conv,group_o1c_user,1,0,0,0
+access_o1c_conv_manager,o1c.conv.manager,model_o1c_conv,group_o1c_manager,1,1,1,1
+
+access_o1c_export_rule_user,o1c.export.rule.user,model_o1c_export_rule,group_o1c_user,1,0,0,0
+access_o1c_export_rule_manager,o1c.export.rule.manager,model_o1c_export_rule,group_o1c_manager,1,1,1,1

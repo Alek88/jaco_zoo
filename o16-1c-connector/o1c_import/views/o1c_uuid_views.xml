@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019, 2020 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="view_o1c_uuid_tree" model="ir.ui.view">
+        <field name="name">o1c.uuid.tree</field>
+        <field name="model">o1c.uuid</field>
+        <field name="arch" type="xml">
+            <tree string="1C UUID bind to Odoo rows">
+                <field name="model"/>
+                <field name="res_id"/>
+                <field name="o1c_uuid"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_o1c_uuid_form" model="ir.ui.view">
+        <field name="name">o1c.uuid.form</field>
+        <field name="model">o1c.uuid</field>
+        <field name="arch" type="xml">
+            <form string="1C UUID">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="res_choice" class="oe_edit_only"/>
+                        <h1><field name="res_choice"/></h1>
+                    </div>
+                    <group>
+                        <field name="o1c_uuid"/>
+                        <field name="model"/>
+                        <field name="res_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_o1c_uuid_search" model="ir.ui.view">
+        <field name="name">o1c.uuid.search</field>
+        <field name="model">o1c.uuid</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="o1c_uuid"/>
+                <field name="model"/>
+                <field name="res_id"/>
+                <group expand="1" string="Group By">
+                    <filter name="groupby_model" string="Model"
+                            context="{'group_by': 'model'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_o1c_uuid" model="ir.actions.act_window">
+        <field name="name">UUID binds</field>
+        <field name="res_model">o1c.uuid</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'search_default_groupby_model':1,
+        }</field>
+    </record>
+
+</odoo>

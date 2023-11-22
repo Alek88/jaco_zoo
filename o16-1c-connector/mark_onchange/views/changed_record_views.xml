@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019-2022 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="view_changed_record_tree" model="ir.ui.view">
+        <field name="name">changed.record.tree</field>
+        <field name="model">changed.record</field>
+        <field name="arch" type="xml">
+            <tree string="Changed records">
+                <field name="res_choice"/>
+                <field name="model"/>
+                <field name="res_id"/>
+                <field name="updated"/>
+                <field name="conv_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='conv_changed_record_search' model='ir.ui.view'>
+        <field name="name">changed.record.search</field>
+        <field name="model">changed.record</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="model" />
+                <field name="res_id" />
+                <field name="conv_id" />
+                <group expand="1" string="Group By">
+                    <filter name="groupby_conv_id" string="Conversion"
+                            context="{'group_by' : 'conv_id'}"/>
+                    <filter name="groupby_model" string="Models"
+                            context="{'group_by' : 'model'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_changed_record" model="ir.actions.act_window">
+        <field name="name">Changed records</field>
+        <field name="res_model">changed.record</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'search_default_groupby_conv_id': True
+            'search_default_groupby_model': True,
+        }</field>
+    </record>
+
+    <menuitem id="menu_changed_record" name="For export" parent="menu_1c_data_group"
+        action="action_changed_record" groups="base.group_no_one" sequence="1"/>
+
+</odoo>

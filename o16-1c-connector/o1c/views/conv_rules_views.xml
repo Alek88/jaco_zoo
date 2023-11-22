@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019-2023 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="view_o1c_conv_rule_line_form" model="ir.ui.view">
+        <field name="name">conv.rule.line.form</field>
+        <field name="model">conv.rule.line</field>
+        <field name="arch" type="xml">
+            <form string="Conversion Field">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Field rule"/>
+                        <h1><field name="name" placeholder="e.g. Sale Order Line"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="search_field"/>
+                            <field name="export_to_param" attrs="{'invisible': [('export_to_param', '=', False)]}"/>
+                        </group>
+                        <group>
+                            <field name="conv_rule_id"/>
+                            <field name="owner_id"/>
+                            <field name="export_to_param" attrs="{'invisible': [('export_to_param', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Source">
+                            <field name="source_name" string="Name"/>
+                            <field name="source_vid_id" string="Vid"/>
+                            <field name="source_tip_id" string="Tip"/>
+                        </group>
+                        <group string="Recipient">
+                            <field name="destin_name" string="Name"/>
+                            <field name="destin_vid_id" string="Vid"/>
+                            <field name="destin_tip_id" string="Tip"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="p_before_processing" string="Before processing Field">
+                            <field name="before_processing"/>
+                        </page>
+                        <page name="p_before_export" string="Before export Field">
+                            <field name="before_export"/>
+                        </page>
+                        <page name="advanced_settings" string="Advanced Settings">
+                            <group>
+                                <field name="conv_id"/>
+                                <field name="parent_rule_id"/>
+                                <field name="disabled"/>
+                                <field name="is_group"/>
+                                <field name="dont_refill_field"/>
+                                <field name="order"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='conv_rule_line_view_search' model='ir.ui.view'>
+        <field name="name">conv.rule.line.search</field>
+        <field name="model">conv.rule.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="code" />
+                <group expand="1" string="Group By">
+                    <filter name="groupby_rule" string="Rule"
+                            context="{'group_by' : 'owner_id'}"/>
+                    <filter name="groupby_folder" string="Folder"
+                            context="{'group_by' : 'parent_rule_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id='conv_rule_line_view_tree' model='ir.ui.view'>
+        <field name="name">conv.rule.line.tree</field>
+        <field name="model">conv.rule.line</field>
+        <field name="arch" type="xml">
+            <tree default_order="is_group,parent_rule_id,order" decoration-danger="search_field"
+                  decoration-bf="is_group" decoration-info="is_group" decoration-muted="disabled">
+                <field name="order" invisible="1"/>
+                <field name="parent_rule_id"/>
+                <!--<field name="name"/>-->
+                <field name="source_name"/>
+                <field name="source_tip_id"/>
+                <field name="destin_name"/>
+                <field name="destin_tip_id"/>
+                <field name="conv_rule_id"/>
+                <field name="search_field" invisible="1"/>
+                <field name="is_group" invisible="1"/>
+                <field name="disabled" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_o1c_conv_rule_form" model="ir.ui.view">
+        <field name="name">conv.rule.form</field>
+        <field name="model">conv.rule</field>
+        <field name="arch" type="xml">
+            <form string="Conversion Model">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Object rule"/>
+                        <h1><field name="name" placeholder="e.g. Sale Order"/></h1>
+                        <label for="code" class="oe_edit_only"/>
+                        <h2><field name="code"/></h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="sync_by_uuid"/>
+                            <field name="disabled"/>
+                            <field name="order"/>
+                        </group>
+                        <group>
+                            <field name="source_name"/>
+                            <field name="destin_name"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="p_rule_line" string="Conversion Fields">
+                            <field name="rule_line_ids" widget="one2many" mode="tree"
+                                   context="{'search_default_groupby_rule': True, 'search_default_groupby_folder': True}">
+                                <tree default_order="parent_rule_id,is_group,order" decoration-danger="search_field"
+                                      decoration-bf="is_group" decoration-info="is_group" decoration-muted="disabled">
+                                    <field name="order" invisible="1"/>
+                                    <field name="parent_rule_id"/>
+                                    <!--<field name="name"/>-->
+                                    <field name="source_name"/>
+                                    <field name="source_tip_id"/>
+                                    <field name="destin_name"/>
+                                    <field name="destin_tip_id"/>
+                                    <field name="conv_rule_id"/>
+                                    <field name="parent_rule_id" invisible="1"/>
+                                    <field name="order" invisible="1"/>
+                                    <field name="search_field" invisible="1"/>
+                                    <field name="is_group" invisible="1"/>
+                                    <field name="disabled" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="p_before_processing" string="Before processing Object">
+                            <field name="before_processing"/>
+                        </page>
+                        <page name="p_before_export" string="Before export Object">
+                            <field name="before_export"/>
+                        </page>
+                        <page name="p_after_import" string="After import Object">
+                            <field name="after_import"/>
+                        </page>
+                        <page name="advanced_settings" string="Advanced Settings">
+                            <group>
+                                <field name="conv_id"/>
+                                <field name="code"/>
+                                <field name="dont_refill"/>
+                                <field name="fields_search"/>
+                                <field name="dont_create"/>
+                                <field name="create_new_code"/>
+                                <field name="dont_fill"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='conv_rule_view_tree' model='ir.ui.view'>
+        <field name="name">conv.rule.tree</field>
+        <field name="model">conv.rule</field>
+        <field name="arch" type="xml">
+            <tree default_order="conv_id,order" decoration-muted="disabled">
+<!--   TODO             <field name="order" widget="handle"/>-->
+                <field name="conv_id"/>
+                <field name="code"/>
+                <field name="order"/>
+                <field name="source_name"/>
+                <field name="destin_name"/>
+                <field name="disabled" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='conv_rule_view_search' model='ir.ui.view'>
+        <field name="name">conv.rule.search</field>
+        <field name="model">conv.rule</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="code" />
+                <group expand="1" string="Group By">
+                    <filter name="groupby_conv" string="Conversion"
+                            context="{'group_by' : 'conv_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_conv_rule" model="ir.actions.act_window">
+        <field name="name">Conversion Rule</field>
+        <field name="res_model">conv.rule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'search_default_groupby_conv':1,
+        }</field>
+    </record>
+
+    <record id="action_conv_rule_line" model="ir.actions.act_window">
+        <field name="name">Conversion Rule of the Field</field>
+        <field name="res_model">conv.rule.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'search_default_groupby_rule': 1,
+            'search_default_groupby_folder': 1
+        }</field>
+    </record>
+
+    <!--Level 2-->
+    <menuitem id="menu_1c_conv_rule" name="Conversion Rules(Models)" parent="mark_onchange.menu_1c_conv_group"
+        action="action_conv_rule"/>
+
+    <menuitem id="menu_1c_conv_rule_line" name="Conversion Rules(Fields)" parent="mark_onchange.menu_1c_conv_group"
+        action="action_conv_rule_line"/>
+
+</odoo>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2021-2023 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id='export_rule_view_form' model='ir.ui.view'>
+        <field name="name">o1c.export.rule.form</field>
+        <field name="model">o1c.export.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <field name="disabled" invisible="1"/>
+                    <widget name="web_ribbon" title="Unavailable model" bg_color="bg-danger"
+                            attrs="{'invisible': [('model_unavailable', '!=', True)]}"/>
+                    <widget name="web_ribbon" title="Disabled" bg_color="bg-danger"
+                            attrs="{'invisible': ['|', ('disabled', '=', False), ('model_unavailable', '=', True)]}"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            attrs="{'invisible': ['|', '|', ('active', '=', True), ('disabled', '=', True), ('model_unavailable', '=', True)]}"/>
+                    <div class="oe_title">
+                        <label for="model" class="oe_edit_only"/>
+                        <h1><field name="model" decoration-danger="model_unavailable" placeholder="res.partner"/></h1>
+                        <field name="model_unavailable" readonly="1" invisible="1"/>
+                        <label for="name" string="Rule name"/>
+                        <h2>
+                            <field name="name"
+                                    placeholder="e.g. Export Sale Order"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="p_to_export" string="For export">
+                            <field name="changed_rec_ids" options="{'no_create_edit': True}"/>
+                        </page>
+                        <page name="p_export_rules" string="Other settings"  groups="base.group_no_one">
+                            <group>
+                                <field name="disabled"/>
+                                <field name="order" readonly="1" force_save="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='export_rule_view_tree' model='ir.ui.view'>
+        <field name="name">o1c.export.rule.tree</field>
+        <field name="model">o1c.export.rule</field>
+        <field name="arch" type="xml">
+            <tree default_order="conv_id,order" decoration-muted="disabled">
+                <field name="order" invisible="1"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="model"/>
+                <field name="conv_rule_id"/>
+                <field name="conv_id" invisible="1"/>
+                <field name="disabled" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='export_rule_view_search' model='ir.ui.view'>
+        <field name="name">o1c.export.rule.search</field>
+        <field name="model">o1c.export.rule</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="code" />
+                <group expand="1" string="Group By">
+                    <filter name="groupby_conv" string="Conversion"
+                            context="{'group_by' : 'conv_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_export_rule" model="ir.actions.act_window">
+        <field name="name">Export Rule</field>
+        <field name="res_model">o1c.export.rule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'search_default_groupby_conv':1,
+        }</field>
+    </record>
+
+    <menuitem id="menu_1c_export_rule" name="Export Rules" parent="mark_onchange.menu_1c_conv_group"
+        action="action_export_rule" sequence="2"/>
+
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+    <!--
+    Copyright (C) 2021,2022 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="cron_upload_data_from_1c" model="ir.cron">
+        <field name="name">1C: Upload data from 1C</field>
+        <field name="model_id" ref="model_o1c_import"/>
+        <field name="state">code</field>
+        <field name="code">model.load_1c_data(cron_mode=True, force_upload=False)</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">10</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+</odoo>

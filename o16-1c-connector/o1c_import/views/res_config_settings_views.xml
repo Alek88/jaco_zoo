@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019,2020,2022 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="res_config_settings_view_form_inherit_o1c_import" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.o1c_import</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="5"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="1C integration" string="1C integration" data-key="o1c">
+                    <h2>Exchange settings</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-lg-6 col-12 o_setting_box" id="o1c_setting">
+                            <div class="o_setting_right_pane">
+                                <label for="o1c_upload_path"/>
+                                <div class="text-muted">
+                                    Path for export|import data from|to 1C.<br/>
+                                    <b>Warning</b>: this Path must be available for the Odoo service.
+                                </div>
+                                <field name="o1c_upload_path" placeholder="/home/odoo/1c-exchange"/>
+                                <!-- TODO create button for select folder from system -->
+
+                                <div class="mt16" attrs="{'invisible': [('o1c_upload_path', 'not in', ['', False])]}">
+                                    <label for="o1c_default_upload_path"/>
+                                    <div class="text-muted">
+                                        By default uploaded from 1C data will store in this folder in xml format
+                                    </div>
+                                    <field name="o1c_default_upload_path" readonly="1" class="w-auto pl-1"/>
+                                </div>
+
+                                <!--  TODO >>>  <a href="https://modool.pro/project/1c-integration.html" title="Documentation" class="o_doc_link" target="_blank"></a>-->
+                                <div class="mt16">
+                                    <button name="%(o1c_import.load_1cdata_action_server)d" icon="fa-upload"
+                                            type="action" string="Upload data from 1C"
+                                            title="Upload data. Stop and rollback on error."
+                                            class="btn btn-primary"/>
+                                </div>
+                                <div class="mt16">
+                                    <button name="%(o1c_import.load_1cdata_force_action_server)d" icon="fa-upload"
+                                            type="action" string="Upload data from 1C (force)"
+                                            title="Upload all allowed data. Skip errors."
+                                            class="btn btn-primary"/>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12 o_setting_box" id="o1c_setting">
+                            <div class="o_setting_right_pane">
+                                <label for="o1c_objects_to_commit"/>
+                                <div class="text-muted">
+                                    On upload each X objects will make commit.
+                                </div>
+                                <field name="o1c_objects_to_commit"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12 o_setting_box" id="o1c_setting">
+                            <div class="o_setting_left_pane">
+                                <field name="o1c_create_direction_dir"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="o1c_create_direction_dir"/>
+                                <div class="text-muted">
+                                    Automatic create folder with this 'DB name' in Folder 'Upload path'.
+                                </div>
+                            </div>
+                            <div class="o_setting_left_pane">
+                                <field name="o1c_create_dbname_dir"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="o1c_create_dbname_dir"/>
+                                <div class="text-muted">
+                                    Automatic create folder named 'from_1c' in Folder 'Upload path'.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+    Copyright (C) 2019,2020,2022 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="action_o1c_vid" model="ir.actions.act_window">
+        <field name="name">Vids</field>
+        <field name="res_model">o1c.vid</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--Level 1-->
+    <menuitem id="menu_1c_struct_group" name="Structure" parent="mark_onchange.menu_1c_root" sequence="1"/>
+
+    <!--Level 2-->
+    <menuitem id="menu_1c_vids" name="Vids" parent="menu_1c_struct_group"
+        action="action_o1c_vid" groups="base.group_no_one"/>
+
+</odoo>

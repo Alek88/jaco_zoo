@@ -1,0 +1,271 @@
+
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;"><b>Two-way</b> integration Odoo and 1C8.x</h2>
+        <h3 class="oe_slogan oe_mb32">use <b>any</b> Odoo configuration and <b>any</b> 1C configuration</h3>
+        <p class="oe_mt32">
+            The application provides the functionality of setting up a <b>two-way</b> data exchange and implements
+            the data exchange itself between 1C and Odoo databases of <b>any (!)</b> Configurations.<br/>
+            As Odoo can be with <b>any</b> composition of models \ tables (including unique ones),
+            so 1C can be <b>absolute in any</b> configuration (including completely self-written).
+        </p>
+        <div class="text-center">
+            <div class="oe_demo oe_screenshot">
+                <img src="Export Sale order SO0001 from Odoo to 1C.png" title="Export Sale order SO0001 from Odoo to 1C"/>
+            </div>
+            <p>Export data from Odoo to 1C</p>
+            <div class="oe_demo oe_screenshot">
+                <img src="Import Sale order from 1C to Odoo.png" title="Import Sale order from 1C to Odoo"/>
+            </div>
+            <p>Import data from 1C to Odoo</p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">What are the Rules of "Integration" or "Matching" or "Exchange"?</h2>
+        <h3 class="oe_slogan">A small remark</h3>
+        <div class="oe_span12">
+            <p class='oe_mt32 text-justify'>
+                The base 1C has its own objects (Directories, Documents, Registers, ...) and their fields.<br/>
+                The Odoo database has its own models (sets of tables) and their fields.<br/>
+                Before exporting data from one system into another, you need to specify <b>FROM which</b> tables and fields of one
+                system <b>INTO which</b> tables and fields of another system your need to export your data.<br/>
+                This process is called setup: <b>"Matching Objects and Fields"</b> or "Conversion Rules" (in 1C terminology).<br/>
+                This "matching" is implemented either "hard" in the program code, or stored in separate "integration rules" files or in database.<br/>
+                Integration files in which the "Rules for matching objects and their fields" are stored, can be edited either manually or through the <b>Integration Designer</b>.
+            </p>
+            <p class='oe_mt32 text-justify'>
+                Of course, the <b>Integration Designer is the most convenient</b> way to configure the "Integration Rules".<br/>
+
+                This Application implements the configuration of the exchange through the Constructor called "1C: Conversion 2.1".<br/>
+                The Designer "1C: Conversion" is free(!), flexible, open, standard (ie, "native" for 1C), run-in for years product,
+                massively used and recommended by all, with good documentation, reputation, correct architecture, a lot of examples, a large community.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">Powerful <b>designer</b> of "Integration rules"</h2>
+        <h3 class="oe_slogan">Easy change the Integration rules <b>without</b> changing the program code</h3>
+        <p class="oe_mt32">
+            The world is boiling up and if your system does not evolve in accordance with the challenges of time, then it will inevitably be waited for by a stop and archive peace.
+            But if your system (1C and \ or Odoo) is changing very actively (often new tables, fields are added, current tables are changed, ...)
+            then you will need to reconfigure the "Rules for matching fields and tables" relatively often.<br/>
+            If the "Rules for matching fields and tables" are embedded in the code("hardcode"),
+            then you will have to overpay for the services of developers.<br/>
+            This Application will allow you on your own, quickly and <b>without changing the code</b> - to
+            change the "Rules for matching objects and fields" in  "Designer of Integration rules".
+        </p>
+        <div class="text-center">
+            <div class="oe_demo oe_screenshot">
+                <img class=" oe_screenshot" src="export rules designer.png"
+                title="Matching Odoo and 1C Sale Order fields"/>
+            </div>
+            <p>Matching Odoo and 1C Sale Order fields in Designer "1C:Conversion"</p>
+        </div>
+        <div class="text-center">
+            <div class="oe_demo oe_screenshot">
+                <img class=" oe_screenshot" src="Odoo crm lead field kanban_state in 1C Conversion.png"
+                title="Odoo crm lead field kanban_state in 1C Conversion"/>
+            </div>
+            <p class="oe_mt16">
+                Odoo crm lead field kanban_state in 1C Conversion
+            </p>
+        </div>
+        <div class="text-center">
+            <div class="oe_demo oe_screenshot">
+                <img class=" oe_screenshot" src="Odoo crm lead structure in 1C Conversion.png"
+                title="Odoo crm lead structure in 1C Conversion"/>
+            </div>
+            <p class="oe_mt16">
+                Odoo crm lead structure in 1C Conversion
+            </p>
+        </div>
+        <div class="text-center">
+            <div class="oe_demo oe_screenshot">
+                <img class=" oe_screenshot" src="Odoo sale order structure in 1C Conversion.png"
+                title="Odoo sale order structure in 1C Conversion"/>
+            </div>
+            <p class="oe_mt16">
+                Odoo sale order structure in 1C Conversion
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">Benefits</h2>
+        <h3 class="oe_slogan">This will greatly save you not only your money, but also time.</h3>
+        <div class="oe_span12 text-center">
+            <p class="oe_mt32">
+               The quick setup of integration between any, even self-written, Odoo and 1C configurations is a huge plus, but we believe that it is not the most important one.
+    The main advantage of this functionality is that setting the matching fields and tables (exchange rules) Odoo and 1C
+    can be done quickly, easily, independently (by business analysts or advanced users)
+    without the need to change the code and without contacting the developers(Odoo or 1C developers).
+            </p>
+            <div class="oe_demo oe_screenshot">
+                <img class=" oe_screenshot" src="setup exchange rule from 1C to Odoo.gif"
+                title="Example: add exchange rule in Rule Disigner"/>
+            </div>
+            <p class="oe_mt16">
+                Example adding exchange rule: 1C Contact VAT -> Odoo Contact VAT
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan" style="color:#875A7B;">The basic idea</h2>
+       <h3 class="oe_slogan">...and algorithm of initial setup</h3>
+        <div class="oe_span12">
+            <p class="oe_mt32">
+                1. This Application creates a description of the structure of the Odoo database(tables and fields) and saves it in an xml file.
+            </p>
+            <div class="oe_demo oe_screenshot">
+                <img src="Create Odoo structure description xml file for 1C Conversion.gif"
+                title="Create Odoo structure description xml file for 1C Conversion"/>
+            </div>
+            <p class="oe_mt32">
+                2. In the 1C database, by processing MD83Exp.epf or MD82Exp.epf, a description of the structure
+                of the 1C configuration is created and stored in the xml file.
+            </p>
+            <div class="oe_demo oe_screenshot">
+                <img src="Create 1C structure description xml file.gif"
+                title="Create 1C structure description xml file"/>
+            </div>
+            <p class="oe_mt32">
+                3. Files with structures (configurations) 1C and Odoo - are loaded into the "database 1C:Conversion of data 2.1" (see the documentation of 1C:Conversion).
+            </p>
+            <div class="text-center">
+                <div class="oe_demo oe_screenshot">
+                    <img src="Odoo and 1C integration setup via 1C Conversion.gif"
+                    title="Setup Odoo and 1C integration via 1C:Conversion"/>
+                </div>
+                <p>How to setup Odoo and 1C Integration</p>
+            </div>
+            <p class="oe_mt32">
+                These first three points are made <b>only one(!) times</b> when you first set up.
+            </p>
+            <p class="oe_mt32">
+                4. In the 1C Conversion database - the Rules for converting objects and the Rules for export are created\change.<br/>
+                5. The created "Integration Rules" are saved in the xml-file, which is used to export data.<br/>
+                If you want to change the rules of data exchange, then proceed with paragraphs 4 and 5.
+                When exporting data is converted and marked in what fields they should be loaded. To do this, use the file "Exchange rules".
+                When importing data, there is all the information required to load the data and the file "Exchange Rules" is not required.
+            </p>
+            <div class="text-center">
+                <p>In side 1C, native processing "Universal Data Exchange" is used</p>
+                <div class="oe_demo oe_screenshot">
+                    <img src="export and import data 1C (to, from) Odoo by 1C Universal data exchange.gif"
+                    title="export and import data 1C (to, from) Odoo by 1C Universal data exchange.gif"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">Flexible and powerful integration</h2>
+        <h3 class="oe_slogan">Customization of non-standard and difficult Conversion Rules</h3>
+        <div class="oe_span12">
+            <p class='oe_mt32 text-justify'>
+                You can set the most complex rules for converting values.<br/>
+                You can write your own data conversion algorithms <b>without having to change the Odoo or 1C program code</b>.
+                Therefore, <b>no restart</b> of the systems (Odoo or 1C) is required to apply the new program code.
+                Therefore, you can dynamically change and expand the integration rules without stopping work.<br/>
+                A few examples:
+            </p>
+            <div class="text-center">
+                <div class="oe_demo oe_screenshot">
+                    <img src="Export from 1C field value to Odoo table row.png"
+                    title="Converting the value of the 1C field into a row of the Odoo table"/>
+                </div>
+                <p>Converting the value of the 1C field into a row of the Odoo table</p>
+            </div>
+            <div class="text-center">
+                <div class="oe_demo oe_screenshot">
+                    <img src="Export from Odoo field Boolean type to 1C field Selection type.png"
+                    title="Convert the Boolean value of the Odoo field into 1C field with type Selection"/>
+                </div>
+                <p>Convert the Boolean value of the Odoo field into 1C field with type Selection</p>
+            </div>
+            <div class="text-center">
+                <div class="oe_demo oe_screenshot">
+                    <img src="Export from Odoo to 1C search row by fixed Name.png"
+                    title="Search for a row of a table (Directory) 1C across the field (Name), containing a certain value"/>
+                </div>
+                <p>Search for a row of a table ("Directory") 1C across the field ("Name"), containing a certain value</p>
+            </div>
+            <div class="text-center">
+                <div class="oe_demo oe_screenshot">
+                    <img src="Export from Odoo field Link type to 1C field Selection type.png"
+                    title="Convert the Odoo field Link type to 1C field Selection type"/>
+                </div>
+                <p>Convert the Odoo field Link type to 1C field Selection type</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan" style="color:#875A7B;">DEMO</h2>
+       <h3 class="oe_slogan">try it online and free</h3>
+        <div class="oe_span6">
+            <p class="text-center">
+                <a href="http://178.63.30.63:43902/web/login" class="btn ml8 mt8"
+                   style="background-color: rgb(40, 117, 170); font-size: 20px; font-weight: bold;border-radius: 7px; color: rgb(255, 255, 255) !important; position: relative; overflow: hidden;"
+                   target="new" title="Odoo live DEMO">
+                    Live DEMO Odoo 11
+                </a><br/>
+                login: admin<br/>
+                password: admin
+            </p>
+        </div>
+        <div class="oe_span6">
+            <p class="text-center">
+                <a href="http://178.63.30.63:33903/buh_ukr20"
+                   class="btn ml8 mt8"
+                   style="background-color: rgb(40, 117, 170); font-size: 20px; font-weight: bold;border-radius: 7px; color: rgb(255, 255, 255) !important; position: relative; overflow: hidden;"
+                   target="new" title="Odoo live DEMO">
+                    Live DEMO 1C 8.3</a><br/>
+                Configuration: Accounting for Ukraine 2.0<br/>
+                without password
+            </p>
+        </div>
+        <div class="oe_span12 text-center" style="text-align: center;">
+            <a style="color: rgb(220, 29, 29); border: 1px solid rgb(220, 29, 29); width: 170px; position: relative; overflow: hidden;"
+               class="btn btn-lg" rel="nofollow" href="https://modool.pro/contactus"
+               target="_blank">
+                <span class="o_ripple" style="height: 170px; width: 170px; top: -59.9334px; left: -11.5px;"></span>
+                 Contact Us
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark" style="background: #faf9fc;height:180px;">
+    <div class="oe_row oe_spaced o_mail_thread" style="position: relative;">
+        <div class="">
+            <img class=" "
+                 style="width: 180px;left: calc(50% - 90px);position: absolute;display: inline-block;"
+                 alt="Modool - Brilliant Quality Odoo Business Solutions"
+                 src="logo Modool.png"/>
+        </div>
+        <a class="o_thread_message" href="https://modool.pro" target="_blank">
+            <img class=" o_thread_icon"
+                 style="position: absolute;top: 0px;display: inline-block;width: 180px;left: calc(50% - 90px);"
+                 title="click Me"
+                 alt="Modool - Brilliant Quality Odoo Business Solutions"
+                 src="logo Modool.gif"/>
+        </a>
+    </div>
+</section>

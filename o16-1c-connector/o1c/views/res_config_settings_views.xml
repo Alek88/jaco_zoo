@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019,2020,2022 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="o1c_config_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="o1c_import.res_config_settings_view_form_inherit_o1c_import"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'o1c'}</field>
+    </record>
+
+    <!-- menu item -->
+    <menuitem
+        id="o1c_menu_config"
+        name="Configuration"
+        parent="mark_onchange.menu_1c_root"
+        sequence="26"/>
+
+    <menuitem id="o1c_config_settings_menu"
+        name="Settings"
+        parent="o1c_menu_config"
+        action="o1c_config_settings_action"
+        sequence="10"/>
+
+</odoo>

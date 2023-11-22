@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record model="o1c.vid" id="data_o1c_vid_property">
+          <field name="name">Реквизит</field>
+        </record>
+
+        <record model="o1c.vid" id="data_o1c_vid_attribute">
+          <field name="name">Свойство</field>
+        </record>
+
+        <record model="o1c.vid" id="data_o1c_vid_folder">
+          <field name="name">ТабличнаяЧасть</field>
+        </record>
+
+        <record model="o1c.vid" id="data_o1c_vid_comp_exchange_plan">
+          <field name="name">СоставПланаОбмена</field>
+        </record>
+
+        <record model="o1c.vid" id="data_o1c_vid_item_comp_exchange_plan">
+          <field name="name">ЭлементСоставаПланаОбмена</field>
+        </record>
+
+        <record model="o1c.vid" id="data_o1c_vid_dimension">
+          <field name="name">Измерение</field>
+        </record>
+
+        <record model="o1c.vid" id="data_o1c_vid_resource">
+          <field name="name">Ресурс</field>
+        </record>
+
+        <record model="o1c.vid" id="data_o1c_vid_types_sub_account">
+          <field name="name">ВидыСубконтоСчета</field>
+        </record>
+
+</odoo>

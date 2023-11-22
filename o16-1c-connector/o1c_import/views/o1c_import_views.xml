@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+    Copyright (C) 2019,2020,2022 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="load_1cdata_action_server" model="ir.actions.server">
+        <field name="name">Load data from 1C</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_o1c_import"/>
+        <field name="state">code</field>
+        <field name="code">action = model.load_1c_data()</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Load data from xml-file with 1C data
+          </p><p>
+            This xml-file must be located on Odoo server.<br/>
+            On any error uploading is interrupted.<br/>
+            But each 500 objects committed.
+          </p>
+        </field>
+    </record>
+
+    <record id="load_1cdata_force_action_server" model="ir.actions.server">
+        <field name="name">Load data from 1C(force mode)</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_o1c_import"/>
+        <field name="state">code</field>
+        <field name="code">action = model.load_1c_data(force_upload=True)</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Load data from xml-file with 1C data
+          </p><p>
+            This xml-file must be located on Odoo server.<br/>
+            On any error uploading is continue.
+            Object's which can't write\create will be skipped.<br/>
+            Each 500 objects committed.
+          </p>
+        </field>
+    </record>
+
+</odoo>

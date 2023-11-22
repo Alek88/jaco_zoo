@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019, 2020, 2022 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <!--TODO <button name="save_conf" string="Save to file" type="object"-->
+            <!--class="oe_stat_button " icon="fa-download"-->
+            <!--attrs="{'invisible': [('ref', '=', False)]}"/>-->
+
+    <record id="conf_form" model="ir.ui.view">
+        <field name="name">odoo.conf.form</field>
+        <field name="model">odoo.conf</field>
+        <field name="arch" type="xml">
+            <form string="Configuration">
+                <header>
+                    <button name="fill_conf" string="Fill" type="object"
+                            class="oe_highlight" icon="fa-play"
+                            attrs="{'invisible': [('update_date','!=',False)]}"/>
+                    <button name="fill_conf" string="Update" type="object"
+                            class="oe_highlight" icon="fa-play"
+                            attrs="{'invisible': [('update_date','=',False)]}"/>
+                    <button name="convert_to_1c" string="Save to 1C file" type="object"
+                            class="oe_highlight" icon="fa-download"
+                            attrs="{'invisible': [('update_date','=',False)]}"/>
+
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="e.g. Odoo Configuration"/></h1>
+                    </div>
+                    <group>
+                        <field name="comment"/>
+                    </group>
+                    <notebook>
+                        <page name="attch" string="Stored Configurations">
+                            <field name="attach_ids"/>
+                        </page>
+                        <page name="childs" string="Models and fields">
+                            <!-- FIXME domain don't work -->
+                            <field name="obj_ids" widget="one2many" domain="[('parent_id','=',False)]" context="{'odoo_conf_id': id}">
+                                <!-- Sinting is slow down:   default_order="is_updated desc,parent_id,name" -->
+                               <tree decoration-muted="del_mark" decoration-danger="is_updated">
+                                    <field name="name"/>
+                                    <field name="parent_id"/>
+                                    <field name="is_updated" invisible="1"/>
+                                    <field name="del_mark" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="extra" string="Extra Info">
+                            <group>
+                                <field name="version"/>
+                                <field name="update_date"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_odoo_conf" model="ir.actions.act_window">
+        <field name="name">Configurations</field>
+        <field name="res_model">odoo.conf</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--Level 2-->
+    <menuitem id="menu_odoo_conf" name="Configurations" parent="menu_1c_struct_group"
+        action="action_odoo_conf" sequence="1"/>
+
+</odoo>

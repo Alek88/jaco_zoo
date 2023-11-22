@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019-2022 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <menuitem
+        id="menu_1c_root"
+        name="1C"
+        web_icon="mark_onchange,static/description/icon.png"
+        sequence="10"/>
+<!-- FIXME>>>       groups="group_o1c_user,group_o1c_manager"-->
+
+    <!--Level 1-->
+    <menuitem id="menu_1c_conv_group" name="Conversion" parent="menu_1c_root" sequence="2"/>
+
+    <menuitem id="menu_1c_data_group" name="Data" parent="menu_1c_root" sequence="4"/>
+
+</odoo>

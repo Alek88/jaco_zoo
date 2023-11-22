@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019, 2020 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <menuitem id="menu_1c_uuid" name="1C UUID bind" parent="mark_onchange.menu_1c_data_group"
+        action="o1c_import.action_o1c_uuid" groups="base.group_no_one"/>
+
+</odoo>

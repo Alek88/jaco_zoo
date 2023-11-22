@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2019, 2020 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+<data noupdate="0">
+
+    <record id="module_category_o1c" model="ir.module.category">
+        <field name="name">1C Integration</field>
+        <field name="sequence" eval="20" />
+    </record>
+
+    <record id="group_o1c_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_o1c"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_o1c_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_o1c"/>
+        <field name="implied_ids" eval="[(4, ref('group_o1c_user'))]"/>
+    </record>
+
+</data>
+
+<data noupdate="1">
+
+    <record id="base.user_admin" model="res.users">
+        <field name="groups_id" eval="[(4,ref('group_o1c_manager'))]"/>
+    </record>
+
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_o1c_manager'))]"/>
+    </record>
+
+</data>
+</odoo>

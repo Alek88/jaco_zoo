@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Copyright (C) 2020 Oleksandr Komarov (https://modool.pro)
+    License Other proprietary.
+    -->
+
+    <record id="load_conv_master_view_xml_done" model="ir.ui.view">
+        <field name="name">Import 1C Conversion</field>
+        <field name="model">o1c.load.conv</field>
+        <field name="arch" type="xml">
+            <form string="Update\Load Conversion from XML-file">
+                <h2>Select a 1C Conversion file to import</h2>
+                <p>Warning: Conversion will be replaced|updated</p>
+                <p>Note: when file size >25Mb then put them to zip archive</p>
+                <p>PS: for creation XML-file make export from 1C Conversion database</p>
+                <field name="conv_id" invisible="1"/>
+                <field name="file_name" invisible="1"/>
+                <field name="xml_file" filename="file_name" placeholder="Choose a file to import..."/>
+                <footer>
+                    <button name="import_file" string="_Import" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="upload_conv_wizard" model="ir.actions.act_window">
+        <field name="name">Import 1C Conversion</field>
+        <field name="res_model">o1c.load.conv</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{
+            "default_conv_id": active_id}
+        </field>
+    </record>
+
+</odoo>
