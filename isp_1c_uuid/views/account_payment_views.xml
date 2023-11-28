@@ -1,0 +1,15 @@
+<odoo>
+  <data>
+     <record id="isp_1c_uuid_account_payment_view" model="ir.ui.view">
+        <field name="name">isp.1c.uuid.inherit.account.payment.view.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="priority" eval="3"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="uuid_1c"/>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

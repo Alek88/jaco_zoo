@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+     <record id="isp_1c_uuid_product_pricelist_view" model="ir.ui.view">
+        <field name="name">isp.1c.uuid.inherit.product.pricelist.view.form</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="priority" eval="3"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pricelist_config']" position="after">
+                <page name="1C">
+                    <group>
+                         <field name="uuid_1c"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

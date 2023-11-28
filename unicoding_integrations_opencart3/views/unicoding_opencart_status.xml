@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="actions_unicoding_opencart_status" model="ir.actions.act_window">
+            <field name="name">Opencart Statues</field>
+            <field name="res_model">unicoding.opencart.status</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    List is empty
+                </p>
+            </field>
+        </record>
+
+        <record id="unicoding_opencart_status_tree" model="ir.ui.view">
+            <field name="name">unicoding.opencart.status.tree</field>
+            <field name="model">unicoding.opencart.status</field>
+            <field name="priority">2</field>
+            <field name="arch" type="xml">
+                <tree string="Opencart Statuses" multi_edit="1" sample="1">
+                    <field name="name"/>
+                    <field name="status" />
+                    <field name="unicoding_marketplace_id" />
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="unicoding_opencart_status_view" model="ir.ui.view">
+            <field name="name">unicoding.opencart.status.form</field>
+            <field name="model">unicoding.opencart.status</field>
+            <field name="arch" type="xml">
+                  <form string="Order statues">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="status"/>
+                            <field name="opencartid" />
+                            <field name="unicoding_marketplace_id" />
+                        </group>
+                    </sheet>
+                  </form>
+            </field>
+        </record>
+    </data>
+</odoo>

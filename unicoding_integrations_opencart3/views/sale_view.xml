@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_order_form">
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='client_order_ref']" position="after">
+                    <field name="opencartid" readonly="1" />
+                </xpath>
+               
+                <xpath expr="//div[@name='button_box']" position="after">
+                    <field name="opencartid" invisible="1"></field>
+                    <div class="badge-pill float-right" attrs="{'invisible': [('opencartid', '==', False)]}">
+                        <field name="unicoding_opencart_status_id_status" decoration-primary="unicoding_opencart_status_id_status in ['PAID']" decoration-success="unicoding_opencart_status_id_status in ['DELIVERED', 'READY_FOR_PICKUP']" decoration-info="unicoding_opencart_status_id_status in ['AWAITING_PROCESSING', 'PROCESSING', 'SHIPPED']"  decoration-muted="unicoding_opencart_status_id_status in ['WILL_NOT_DELIVER']" decoration-danger="unicoding_opencart_status_id_status in ['RETURNED', 'OUT_FOR_DELIVERY']" widget="badge" optional="show" readonly="1"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

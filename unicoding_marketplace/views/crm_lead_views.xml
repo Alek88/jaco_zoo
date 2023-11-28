@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="unicoding_marketplace_crm_case_form_view_oppor" model="ir.ui.view">
+            <field name="name">unicoding.marketplace.unicoding_marketplace.inherited.crm</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="unicoding_marketplace_id" string="Marketplace ID" groups="base.group_no_one" readonly="1"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+</odoo>

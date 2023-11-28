@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <extension_install_id>Odoo Unicoding</extension_install_id>
+    <name>odoo Unicoding</name>
+    <version>3.0.2.0</version>
+    <author><![CDATA[<span class="label label-danger">unicoding</span>]]></author>
+    <code>odoo_unicoding</code>
+
+
+
+
+
+    <file path="catalog/model/account/api.php">
+        <operation error="skip">
+            <search><![CDATA[$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "api` WHERE `username` = '" . $this->db->escape($username) . "' `key` = '" . $this->db->escape($key) . "' AND status = '1'");]]></search>
+            <add position="replace"><![CDATA[$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "api` WHERE `username` = '" . $this->db->escape($username) . "' and `key` = '" . $this->db->escape($key) . "' AND status = '1'");]]></add>
+        </operation>
+    </file>
+
+
+    <file path="admin/controller/setting/setting.php">
+        <operation>
+            <search><![CDATA[$this->load->model('catalog/information');]]></search>
+            <add position="before"><![CDATA[
+            $data['config_odoo_webhook_url'] = $this->config->get('config_odoo_webhook_url');
+            $data['config_odoo_status_order'] = (int)$this->config->get('config_odoo_status_order');
+            $data['config_odoo_db'] = $this->config->get('config_odoo_db');
+            $data['config_odoo_username'] = $this->config->get('config_odoo_username');
+            $data['config_odoo_password'] = $this->config->get('config_odoo_password');
+
+
+
+
+            $data['entry_odoo_webhook_url'] = $this->language->get('entry_odoo_webhook_url');
+            $data['entry_odoo_status_order'] = $this->language->get('entry_odoo_status_order');
+            $data['entry_odoo_status_db'] = $this->language->get('entry_odoo_status_db');
+            $data['entry_odoo_status_username'] = $this->language->get('entry_odoo_status_username');
+            $data['entry_odoo_status_password'] = $this->language->get('entry_odoo_status_password');
+            $data['tab_odoo'] = $this->language->get('tab_odoo');   
+            $data['entry_odoo_webhook_url_placeholder'] = $this->language->get('entry_odoo_webhook_url_placeholder');
+            $data['entry_odoo_db'] = $this->language->get('entry_odoo_db');
+            $data['entry_odoo_username'] = $this->language->get('entry_odoo_username');
+            $data['entry_odoo_password'] = $this->language->get('entry_odoo_password');
+            
+            if (version_compare(VERSION, '3', '>=')) {
+
+                if ($data['config_odoo_status_order'] and strpos($data['config_odoo_webhook_url'], "unicoding-marketplace/opencart") !== False){
+                    // activation Webhook event
+                    $this->load->model('setting/event');
+                    if (! $this->model_setting_event->getEventByCode('odoo_shipping_order_history')){
+                        $this->model_setting_event->addEvent('odoo_shipping_order_history', 'catalog/model/checkout/order/addOrderHistory/before','api/integrations/orderHistory');
+                    }
+                }else{
+
+                    $this->load->model('setting/event');
+                    if ($this->model_setting_event->getEventByCode('odoo_shipping_order_history')){
+                        $this->model_setting_event->deleteEvent('odoo_shipping_order_history');
+                    }
+                }
+            }else{
+                if ($data['config_odoo_status_order'] and strpos($data['config_odoo_webhook_url'], "unicoding-marketplace/opencart") !== False){
+                    // activation Webhook event
+                    $this->load->model('extension/event');
+                    $query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "event` WHERE `code` = '" . $this->db->escape('odoo_shipping_order_history') . "' LIMIT 1");
+
+                    if (! $query->row ){
+                        $this->model_extension_event->addEvent('odoo_shipping_order_history', 'catalog/model/checkout/order/addOrderHistory/before','api/integrations/orderHistory');
+                    }
+                }else{
+
+                    $this->load->model('extension/event');
+                    $query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "event` WHERE `code` = '" . $this->db->escape('odoo_shipping_order_history') . "' LIMIT 1");
+                    if ($query->row){
+                        $this->model_extension_event->deleteEvent('odoo_shipping_order_history');
+                    }
+                }
+
+            }
+
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/controller/setting/store.php">
+        <operation>
+            <search><![CDATA[$this->load->model('catalog/information');]]></search>
+            <add position="before"><![CDATA[
+
+            if (isset($this->request->post['config_odoo_webhook_url'])) {
+                $data['config_odoo_webhook_url'] = $this->request->post['config_odoo_webhook_url'];
+            } elseif (isset($store_info['config_odoo_webhook_url'])) {
+                $data['config_odoo_webhook_url'] = $store_info['config_odoo_webhook_url'];
+            } else {
+                $data['config_odoo_webhook_url'] = '';
+            }
+
+            if (isset($this->request->post['config_odoo_status_order'])) {
+                $data['config_odoo_status_order'] = $this->request->post['config_odoo_status_order'];
+            } elseif (isset($store_info['config_odoo_status_order'])) {
+                $data['config_odoo_status_order'] = $store_info['config_odoo_status_order'];
+            } else {
+                $data['config_odoo_status_order'] = '';
+            }
+            if (isset($this->request->post['config_odoo_db'])) {
+                $data['config_odoo_db'] = $this->request->post['config_odoo_db'];
+            } elseif (isset($store_info['config_odoo_db'])) {
+                $data['config_odoo_db'] = $store_info['config_odoo_db'];
+            } else {
+                $data['config_odoo_db'] = '';
+            }
+
+            if (isset($this->request->post['config_odoo_username'])) {
+                $data['config_odoo_username'] = $this->request->post['config_odoo_username'];
+            } elseif (isset($store_info['config_odoo_username'])) {
+                $data['config_odoo_username'] = $store_info['config_odoo_username'];
+            } else {
+                $data['config_odoo_username'] = '';
+            }
+
+            if (isset($this->request->post['config_odoo_password'])) {
+                $data['config_odoo_password'] = $this->request->post['config_odoo_password'];
+            } elseif (isset($store_info['config_odoo_password'])) {
+                $data['config_odoo_password'] = $store_info['config_odoo_password'];
+            } else {
+                $data['config_odoo_password'] = '';
+            }
+
+
+
+            $data['entry_odoo_webhook_url'] = $this->language->get('entry_odoo_webhook_url');
+            $data['entry_odoo_status_order'] = $this->language->get('entry_odoo_status_order');
+            $data['entry_odoo_status_db'] = $this->language->get('entry_odoo_status_db');
+            $data['entry_odoo_status_username'] = $this->language->get('entry_odoo_status_username');
+            $data['entry_odoo_status_password'] = $this->language->get('entry_odoo_status_password');
+            $data['tab_odoo'] = $this->language->get('tab_odoo');   
+            $data['entry_odoo_webhook_url_placeholder'] = $this->language->get('entry_odoo_webhook_url_placeholder');
+            $data['entry_odoo_db'] = $this->language->get('entry_odoo_db');
+            $data['entry_odoo_username'] = $this->language->get('entry_odoo_username');
+            $data['entry_odoo_password'] = $this->language->get('entry_odoo_password');
+
+            if (version_compare(VERSION, '3', '>=')) {
+
+                if ($data['config_odoo_status_order'] and strpos($data['config_odoo_webhook_url'], "unicoding-marketplace/opencart") !== False){
+                    // activation Webhook event
+                    $this->load->model('setting/event');
+                    if (! $this->model_setting_event->getEventByCode('odoo_shipping_order_history')){
+                        $this->model_setting_event->addEvent('odoo_shipping_order_history', 'catalog/model/checkout/order/addOrderHistory/before','api/integrations/orderHistory');
+                    }
+                }else{
+
+                    $this->load->model('setting/event');
+                    if ($this->model_setting_event->getEventByCode('odoo_shipping_order_history')){
+                        $this->model_setting_event->deleteEvent('odoo_shipping_order_history');
+                    }
+                }
+            }else{
+                if ($data['config_odoo_status_order'] and strpos($data['config_odoo_webhook_url'], "unicoding-marketplace/opencart") !== False){
+                    // activation Webhook event
+                    $this->load->model('extension/event');
+                    $query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "event` WHERE `code` = '" . $this->db->escape('odoo_shipping_order_history') . "' LIMIT 1");
+
+                    if (! $query->row ){
+                        $this->model_extension_event->addEvent('odoo_shipping_order_history', 'catalog/model/checkout/order/addOrderHistory/before','api/integrations/orderHistory');
+                    }
+                }else{
+
+                    $this->load->model('extension/event');
+                    $query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "event` WHERE `code` = '" . $this->db->escape('odoo_shipping_order_history') . "' LIMIT 1");
+                    if ($query->row){
+                        $this->model_extension_event->deleteEvent('odoo_shipping_order_history');
+                    }
+                }
+
+            }
+
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/language/*/setting/{setting.php,store.php}">
+        <operation>
+            <search><![CDATA[
+            $_['entry_country']
+            ]]></search>
+            <add position="before"><![CDATA[
+                $_['entry_odoo_webhook_url']                 = 'Odoo Webhook URL';
+                $_['entry_odoo_status_order']                 = 'Send Order Status to Odoo';
+                $_['entry_odoo_db']                 = 'Odoo Database';
+                $_['entry_odoo_username']                 = 'Odoo Username';
+                $_['entry_odoo_password']                 = 'Odoo Password';
+                $_['tab_odoo']                 = 'Odoo';
+                $_['entry_odoo_webhook_url_placeholder']                 = 'https://yourodoowebsite.com:8089/unicoding-marketplace/opencart';
+                $_['entry_odoo_db_placeholder']                 = 'odoo';
+                $_['entry_odoo_username_placeholder']                 = 'odoo';
+                $_['entry_odoo_password_placeholder']                 = '443b3d89ae218581e6d9abaf2d4e1ec9811a40fb';
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/setting/{setting,store_form}.twig">
+
+
+        <operation>
+            <search><![CDATA[
+            <li><a href="#tab-local" data-toggle="tab">
+            ]]></search>
+            <add position="before"><![CDATA[
+             <li><a href="#tab-odoo" data-toggle="tab">{{ tab_odoo }}</a></li>
+
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[<div class="tab-pane" id="tab-local">]]></search>
+            <add position="before"><![CDATA[
+             <div class="tab-pane" id="tab-odoo">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-config_odoo_webhook_url">{{entry_odoo_webhook_url}}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_odoo_webhook_url" value="{{config_odoo_webhook_url}}" placeholder="{{entry_odoo_webhook_url_placeholder}}" id="input-config_odoo_webhook_url" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-config_odoo_db">{{ entry_odoo_db }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_odoo_db" value="{{ config_odoo_db }}" placeholder="{{ entry_odoo_db_placeholder }}" id="input-config_odoo_db" class="form-control" />
+                </div>
+              </div>
+            
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-config_odoo_username">{{ entry_odoo_username }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_odoo_username" value="{{ config_odoo_username }}" placeholder="{{ entry_odoo_username_placeholder }}" id="input-config_odoo_username" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-config_odoo_password">{{ entry_odoo_password }}</label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_odoo_password" value="{{ config_odoo_password }}" placeholder="{{ entry_odoo_password_placeholder }}" id="input-config_odoo_password" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" >{{entry_odoo_status_order}}</label>
+                <div class="col-sm-10">
+
+                    <label class="radio-inline"> {% if config_odoo_status_order %}
+                    <input type="radio" name="config_odoo_status_order" value="1" checked="checked" />
+                    {{text_yes}}
+                    {% else %}
+                    <input type="radio" name="config_odoo_status_order" value="1" />
+                    {{text_yes}}
+                    {% endif %} </label>
+
+                    <label class="radio-inline"> {% if not config_odoo_status_order %}
+                    <input type="radio" name="config_odoo_status_order" value="0" checked="checked" />
+                    {{ text_no }}
+                    {% else %}
+                    <input type="radio" name="config_odoo_status_order" value="0" />
+                    {{ text_no }}
+                    {% endif %} </label>
+                </div>
+              </div>
+            </div>
+
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/setting/{setting,store_form}.tpl">
+
+
+        <operation error="skip">
+            <search><![CDATA[
+            <li><a href="#tab-local" data-toggle="tab"><?php echo $tab_local; ?></a></li>
+            ]]></search>
+            <add position="before"><![CDATA[
+             <li><a href="#tab-odoo" data-toggle="tab"><?php echo $tab_odoo; ?></a></li>
+
+            ]]></add>
+        </operation>
+        <operation error="skip">
+            <search><![CDATA[
+            <div class="tab-pane" id="tab-local">
+            ]]></search>
+            <add position="before"><![CDATA[
+             <div class="tab-pane" id="tab-odoo">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-config_odoo_webhook_url"><?php echo $entry_odoo_webhook_url; ?></label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_odoo_webhook_url" value="<?php echo $config_odoo_webhook_url; ?>" placeholder="<?php echo $entry_odoo_webhook_url_placeholder; ?>" id="input-config_odoo_webhook_url" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-config_odoo_username"><?php echo $entry_odoo_username; ?></label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_odoo_username" value="<?php echo $config_odoo_username; ?>" placeholder="<?php echo $entry_odoo_username_placeholder; ?>" id="input-config_odoo_username" class="form-control" />
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-config_odoo_password"><?php echo $entry_odoo_password; ?></label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_odoo_password" value="<?php echo $config_odoo_password; ?>" placeholder="<?php echo $entry_odoo_password_placeholder; ?>" id="input-config_odoo_password" class="form-control" />
+                </div>
+              </div>
+
+              
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-config_odoo_password"><?php echo $entry_odoo_password; ?></label>
+                <div class="col-sm-10">
+                    <input type="text" name="config_odoo_password" value="<?php echo $config_odoo_password; ?>" placeholder="<?php echo $entry_odoo_password_placeholder; ?>" id="input-config_odoo_password" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" ><?php echo $entry_odoo_status_order; ?></label>
+                <div class="col-sm-10">
+
+                    <label class="radio-inline"> <?php if ($config_odoo_status_order) { ?>
+                    <input type="radio" name="config_odoo_status_order" value="1" checked="checked" />
+                    <?php echo $text_yes; ?>
+                    <?php } else { ?>
+                    <input type="radio" name="config_odoo_status_order" value="1" />
+                    <?php echo $text_yes; ?>
+                    <?php } ?> </label>
+
+                     <label class="radio-inline"> <?php if (!$config_odoo_status_order) { ?>
+                    <input type="radio" name="config_odoo_status_order" value="0" checked="checked" />
+                    <?php echo $text_no; ?>
+                    <?php } else { ?>
+                    <input type="radio" name="config_odoo_status_order" value="0" />
+                    <?php echo $text_no; ?>
+                    <?php } ?> </label>
+                </div>
+              </div>
+            </div>
+
+            ]]></add>
+        </operation>
+    </file>
+
+
+
+</modification>

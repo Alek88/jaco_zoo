@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Cron for Auto Backup Schedules -->
+        <record model="ir.cron" id="ir_cron_unicoding_marketplace_categories">
+            <field name="name">Unicoding Sync Categories Cron</field>
+            <field name="interval_number">60</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="doall" eval="False" />
+            <field name="model_id" ref="model_unicoding_marketplace" />
+            <field name="state">code</field>
+            <field name="code">model.cron_sync_categories()</field>
+        </record>
+
+         <record model="ir.cron" id="ir_cron_unicoding_marketplace_customers">
+            <field name="name">Unicoding Sync Customers Cron</field>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="doall" eval="False" />
+            <field name="model_id" ref="model_unicoding_marketplace" />
+            <field name="state">code</field>
+            <field name="code">model.cron_sync_customers()</field>
+        </record>
+
+         <record model="ir.cron" id="ir_cron_unicoding_marketplace_orders">
+            <field name="name">Unicoding Sync Orders Cron</field>
+            <field name="interval_number">3</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="doall" eval="False" />
+            <field name="model_id" ref="model_unicoding_marketplace" />
+            <field name="state">code</field>
+            <field name="code">model.cron_sync_orders()</field>
+        </record>
+
+        <record model="ir.cron" id="ir_cron_unicoding_marketplace_products">
+            <field name="name">Unicoding Sync Products Cron</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="doall" eval="False" />
+            <field name="model_id" ref="model_unicoding_marketplace" />
+            <field name="state">code</field>
+            <field name="code">model.cron_sync_products()</field>
+        </record>
+
+        <record model="ir.cron" id="ir_cron_unicoding_marketplace_odoo_products">
+            <field name="name">Unicoding Sync Odoo Products Cron</field>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="doall" eval="False" />
+            <field name="model_id" ref="model_unicoding_marketplace" />
+            <field name="state">code</field>
+            <field name="code">model.cron_sync_odoo_products()</field>
+        </record>
+
+        <record id="pricelist_eur" model="product.pricelist">
+            <field name="name">EUR Pricelist</field>
+            <field name="currency_id" ref="base.EUR"/>
+        </record>
+        
+        <record id="pricelist_usd" model="product.pricelist">
+            <field name="name">USD Pricelist</field>
+            <field name="currency_id" ref="base.USD"/>
+        </record>
+        
+        <record id="pricelist_rub" model="product.pricelist">
+            <field name="name">RUB Pricelist</field>
+            <field name="currency_id" ref="base.RUB"/>
+        </record>
+        
+        <record id="pricelist_gbp" model="product.pricelist">
+            <field name="name">GBP Pricelist</field>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+        
+        <record id="pricelist_chf" model="product.pricelist">
+            <field name="name">CHF Pricelist</field>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
+
+        
+
+    </data>
+</odoo>
+

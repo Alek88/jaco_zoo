@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+            <record id="res_config_settings_view_form" model="ir.ui.view">
+                <field name="name">res.config.settings.view.form.inherit.unicoding_marketplace</field>
+                <field name="model">res.config.settings</field>
+                <field name="priority" eval="30"/>
+                <field name="inherit_id" ref="base.res_config_settings_view_form" />
+                <field name="arch" type="xml">
+                    <xpath expr="//div[hasclass('settings')]" position="inside" >
+                        <div class="app_settings_block" data-string="marketplace" string="Marketplace" data-key="unicoding_marketplace" groups="base.group_system">
+                            <h2>Marketplaces</h2>
+                            <div class="row mt16 o_settings_container">
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_id" string="Select marketplace"/>
+                                        <field name="unicoding_marketplace_id" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}" options="{'no_create': True, 'no_create_edit' : True}"/>
+                                        <field name="unicoding_marketplace_type" invisible="1"/>
+                                        <!--<button name="396" icon="fa-arrow-right" type="action" string="Create More" class="oe_link"/>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2 id="api_settings" attrs="{'invisible': [('unicoding_marketplace_id', '=', False)]}">API Settings</h2>
+
+                            <h2 attrs="{'invisible': [('unicoding_marketplace_id', '=', False)]}">Sales Settings</h2>
+                            <div class="row mt16 o_settings_container" attrs="{'invisible': [('unicoding_marketplace_id', '=', False)]}">
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_currency_id" string="Currency"/>
+                                        <div class="text-muted">
+                                            Default store currency
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_currency_id" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_team_id" string="Sales Team"/>
+                                        <div class="text-muted">
+                                            Sales Team
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_team_id" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_default_pricelist_ids" string="Price List"/>
+                                        <div class="text-muted">
+                                            Price List
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_default_pricelist_ids" class="o_light_label" widget="many2many_tags" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_service_categ_id" string="Service Category"/>
+                                        <div class="text-muted">
+                                            Service Category
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_service_categ_id" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_parent_default_categ_id" string="Parent Default Category"/>
+                                        <div class="text-muted">
+                                            Parent Default Category
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_parent_default_categ_id" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_delivery_categ_id" string="Default Delivery Category"/>
+                                        <div class="text-muted">
+                                            Default Delivery Category
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_delivery_categ_id" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_create_invoice" string="Auto create Invoice?"/>
+                                        <div class="text-muted">
+                                            Auto create Invoice?
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_create_invoice" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_validate_invoice" string="Auto validate invoice?"/>
+                                        <div class="text-muted">
+                                            Auto validate invoice?
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_validate_invoice" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                 <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_journal_id" string="Journal"/>
+                                        <div class="text-muted">
+                                           Journal for payments
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_journal_id" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_company_id" string="Company"/>
+                                        <div class="text-muted">
+                                          Company
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_company_id" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2 attrs="{'invisible': [('unicoding_marketplace_id', '=', False)]}">Stock Settings</h2>
+                            <div class="row mt16 o_settings_container" attrs="{'invisible': [('unicoding_marketplace_id', '=', False)]}">
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_location_dest_id" string="Destination Location"/>
+                                        <div class="text-muted">
+                                            Destination Location
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_location_dest_id" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_sync_stock" string="Stock sync"/>
+                                        <div class="text-muted">
+                                            Stock sync
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_sync_stock" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_delivery_set_to_done" string="Auto set to Done delivery"/>
+                                        <div class="text-muted">
+                                            Auto set to Done delivery
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_delivery_set_to_done" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <h2 attrs="{'invisible': [('unicoding_marketplace_id', '=', False)]}">Product Settings</h2>
+                            <div class="row mt16 o_settings_container" attrs="{'invisible': [('unicoding_marketplace_id', '=', False)]}">
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_sync_product_images" string="Product Images"/>
+                                        <div class="text-muted">
+                                            Download product images
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_sync_product_images" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_allow_update_price_oc" string="Update product price"/>
+                                        <div class="text-muted">
+                                            Price will be updated automatically when price is changed in Odoo
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_allow_update_price_oc" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <h2 attrs="{'invisible': [('unicoding_marketplace_id', '=', False)]}">Schedule Settings</h2>
+                            <div class="row mt16 o_settings_container" attrs="{'invisible': [('unicoding_marketplace_id', '=', False)]}">
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_sync_products" string="Sync Products"/>
+                                        <div class="text-muted">
+                                            Automaticaly get new Products from shop
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_sync_products" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_sync_odoo_products" string="Sync Odoo Products"/>
+                                        <div class="text-muted">
+                                            Automaticaly check new products in Odoo and send it to shop
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_sync_odoo_products" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_sync_orders" string="Sync Orders"/>
+                                        <div class="text-muted">
+                                            Automaticaly get new Orders
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_sync_orders" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_sync_categories" string="Sync Categories"/>
+                                        <div class="text-muted">
+                                             Automaticaly get new Categories
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_sync_categories" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_sync_customers" string="Sync Customers"/>
+                                        <div class="text-muted">
+                                            Sync all Customers
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_sync_customers" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_logging" string="Logging"/>
+                                        <div class="text-muted">
+                                           Logging
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_logging" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_page_orders_num" string="Number of orders per page"/>
+                                        <div class="text-muted">
+                                            Set this smaller if you have problem with get orders
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_page_orders_num" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_page_products_num" string="Number of products per page"/>
+                                        <div class="text-muted">
+                                            Set this smaller if you have problem with get products
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_page_products_num" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_page_orders_num" string="Sync Categories"/>
+                                        <div class="text-muted">
+                                            Categories: Quantity in batch
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_category_batch_num" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6 o_setting_box">
+                                    <div class="o_setting_right_pane">
+                                        <label for="unicoding_marketplace_page_customer_num" string="Customers in batch"/>
+                                        <div class="text-muted">
+                                            Customers: Quantity in batch
+                                        </div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="unicoding_marketplace_page_customer_num" class="o_light_label" attrs="{'required':[('unicoding_marketplace_id','!=',False)]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+                               
+
+                                
+                            </div>
+
+
+                        </div>
+                    </xpath>
+                </field>
+            </record>
+
+            <record id="action_unicoding_marketplace_config_settings" model="ir.actions.act_window">
+                <field name="name">Settings</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">res.config.settings</field>
+                <field name="view_mode">form</field>
+                <field name="target">inline</field>
+                <field name="context">{'module' : 'unicoding_marketplace', 'bin_size': False}</field>
+            </record>
+
+            <menuitem id="menu_unicoding_marketplace_general_settings" name="Settings" parent="menu_unicoding_marketplace_config_settings" sequence="0" action="action_unicoding_marketplace_config_settings" groups="base.group_system"/>
+
+    </data>
+</odoo>

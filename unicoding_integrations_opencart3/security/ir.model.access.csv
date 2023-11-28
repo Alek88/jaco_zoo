@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_unicoding_opencart_status_admin,unicoding.opencart.status:base.group_system,model_unicoding_opencart_status,base.group_system,1,1,1,1
+access_unicoding_opencart_status_user,unicoding.opencart.status:account.group_account_user,model_unicoding_opencart_status,base.group_user,1,1,1,1

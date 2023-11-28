@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+     <record id="isp_1c_uuid_stock_picking_view" model="ir.ui.view">
+        <field name="name">isp.1c.uuid.inherit.stock.picking.view.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="priority" eval="3"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='note']" position="after">
+                <page string="1C" name='1c'>
+                    <group>
+                        <field name="uuid_1c"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

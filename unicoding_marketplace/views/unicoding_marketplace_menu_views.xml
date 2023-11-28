@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem action="actions_unicoding_marketplace" id="menu_unicoding_marketplace" groups="base.group_user" sequence="10"  name="Marketplace" web_icon="unicoding_marketplace,static/description/icon.png">
+        <menuitem id="menu_unicoding_marketplace_config_settings" name="Configuration" sequence="100"/>
+
+        <menuitem id="menu_unicoding_marketplace_dashboard" name="Dashboard" sequence="1" action="actions_unicoding_marketplace"  />
+
+        <menuitem id="menu_unicoding_marketplace_sales" name="Sales" sequence="2">
+            <menuitem id="menu_unicoding_marketplace_orders" name="Orders" sequence="200">
+                <menuitem id="menu_unicoding_marketplace_quotations" sequence="1" name="Quotations" action="actions_unicoding_marketplace_quotations"/>
+                <menuitem id="menu_unicoding_marketplace_sales_orders" sequence="2" name="Sales Orders" action="actions_unicoding_marketplace_sales_orders"/>
+                <menuitem id="menu_unicoding_marketplace_invoices" sequence="3" name="Invoices" action="actions_unicoding_marketplace_invoices"/>
+                <menuitem id="menu_unicoding_marketplace_sales_teams" sequence="4" name="Sales Teams" action="sales_team.crm_team_action_sales"/>
+                <menuitem id="menu_unicoding_marketplace_customers" sequence="5" name="Customers" action="actions_unicoding_marketplace_customers"/>
+
+            </menuitem>
+
+        </menuitem>
+        <menuitem id="menu_unicoding_marketplace_stock" name="Products" sequence="4">
+                <menuitem id="menu_unicoding_marketplace_products" sequence="1" name="Products" action="actions_unicoding_marketplace_products"/>
+                <menuitem id="menu_unicoding_marketplace_product_variants" sequence="2" name="Product Variants" action="actions_unicoding_marketplace_product_variants"/>
+                <menuitem id="menu_unicoding_marketplace_categories" sequence="3" name="Product Categories" action="actions_unicoding_marketplace_categories"/>
+        </menuitem>
+        <menuitem id="menu_unicoding_marketplace_crm" name="CRM" sequence="3"  action="actions_unicoding_marketplace_crm"/>
+        <menuitem id="menu_unicoding_marketplace_sale_report" name="Sale Report" sequence="5" action="actions_unicoding_marketplace_sale_report"/>
+    </menuitem>
+</odoo>

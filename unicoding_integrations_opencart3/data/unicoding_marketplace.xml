@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+
+
+        <record id="unicoding_marketplace_user_opencart_partner" model="res.partner">
+            <field name="name">Opencart</field>
+            <field name="is_company">0</field>
+            <field name="city">Brest</field>
+            <field name="zip">224001</field>
+            <field name="country_id" ref="base.be"/>
+            <field name="street">Vorovskogo 31</field>
+            <field name="email">info@unicoding.by</field>
+            <field name="website">https://www.unicoding.by</field>
+            <field name="image_1920" type="base64" file="unicoding_integrations_opencart3/static/src/img/opencart.png"/>
+        </record>
+
+        <record id="unicoding_marketplace_user_opencart_user" model="res.users">
+            <field name="name">Opencart</field>
+            <field name="image_1920" type="base64" file="unicoding_integrations_opencart3/static/src/img/opencart.png"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="login">opencart777</field>
+            <field name="password">opencart777</field>
+            <field name="partner_id" ref="unicoding_marketplace_user_opencart_partner"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+            <field name="state">False</field>
+        </record>
+
+
+         <record id="team_sales_opencart" model="crm.team">
+            <field name="name">Opencart</field>
+            <field name="sequence">0</field>
+            <field name="member_ids" eval="[(4, ref('unicoding_integrations_opencart3.unicoding_marketplace_user_opencart_user'))]"/>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record model="mail.channel" id="unicoding_marketplace_opencart_channel">
+            <field name="name">Opencart</field>
+            <field name="description">Opencart channel</field>
+            <field name="image_128" type="base64" file="unicoding_integrations_opencart3/static/src/img/opencart.png"/>
+        </record>
+
+
+        <record model="mail.channel.member" id="channel_member_general_channel_for_admin">
+            <field name="partner_id" ref="base.partner_admin"/>
+            <field name="channel_id" ref="unicoding_marketplace_opencart_channel"/>
+        </record>
+
+
+<!-- 
+       <record model="mail.channel.partner" id="channel_partner_general_channel_for_admin">
+            <field name="partner_id" ref="base.partner_admin"/>
+            <field name="channel_id" ref="unicoding_integrations_opencart3.unicoding_marketplace_opencart_channel"/>
+       </record> -->
+
+        <record id="unicoding_marketplace_opencart3" model="unicoding.marketplace">
+            <field name="name">Opencart</field>
+            <field name="image_128" type="base64" file="unicoding_integrations_opencart3/static/src/img/opencart.png"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="url">https://opencart.com/</field>
+            <field name="api_username">default</field>
+            <field name="api_key"></field>
+            <field name="type">opencart</field>
+
+
+        </record>
+
+
+    </data>
+</odoo>

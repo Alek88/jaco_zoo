@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_unicoding_opencart_status" name="Order statuses" sequence="101" parent="unicoding_marketplace.menu_unicoding_marketplace_config_settings" action="actions_unicoding_opencart_status"/>
+</odoo>
