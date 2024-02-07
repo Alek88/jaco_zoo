@@ -154,7 +154,7 @@ class Unicodingmarketplace(models.Model):
         for object in self.env['unicoding.marketplace'].search([]):
             if object.state == "on":
                 if object.sync_odoo_products:
-                    object.action_sync_odoo_products()
+                                            object.action_sync_odoo_products()
 
     def cron_sync_orders(self):
         for object in self.env['unicoding.marketplace'].search([]):

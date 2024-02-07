@@ -1,0 +1,47 @@
+<odoo>
+  <data>
+     <record id="isp_related_product_product_template_view" model="ir.ui.view">
+        <field name="name">isp.related.product.inherit.product.template.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="priority" eval="3"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='invoicing']" position="after">
+                <page string="Related product" name='elated_product'>
+                    <button string="СOPY VARIANTS AND ATTRIBUTES" class="float-end btn-secondary" type="object" name="action_copy_product_attribute"/>
+                    <field name="its_related_product_ids" domain="[('id','!=', active_id), ('id', 'not in', its_related_product_ids)]">
+
+                        <tree string="Related products" editable="bottom" decoration-info="name &lt;= 1">
+                            <field name="name" on_change="1" can_create="false" readonly="1" can_write="true"/>
+                            <!--<field name="its_attribute_id" domain="[('id', 'in', its_attribute_id)]"/>-->
+                            <field name="its_attribute_id"/>
+                            <field name="its_value_id" widget="many2one"
+                                   options="{'no_create_edit': True, 'color_field': 'color'}"
+                                   domain="[('attribute_id', '=', its_attribute_id)]"
+                                   on_change="1" can_create="true" can_write="true"/>
+                            <button string="Open" class="float-end btn-secondary" type="object" name="action_open_product_template"/>
+                        </tree>
+
+                    </field>
+                </page>
+            </xpath>
+        </field>
+     </record>
+
+      <record id="isp_is_variant_product_template_view" model="ir.ui.view">
+        <field name="name">isp.is.variant.inherit.product.template.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="priority" eval="3"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='value_ids']" position="after">
+                <field name="is_variant"/>
+            </xpath>
+        </field>
+    </record>
+
+  </data>
+</odoo>
+
+
+

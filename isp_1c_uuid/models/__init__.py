@@ -11,3 +11,5 @@ from . import stock_quant
 from . import account_payment
 from . import product_pricelist
 from . import product_product
+from . import product_template_attribut_line
+from . import product_attribute_value

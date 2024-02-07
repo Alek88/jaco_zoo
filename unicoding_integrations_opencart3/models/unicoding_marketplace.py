@@ -22,7 +22,7 @@ class UnicodingMarketplace(models.Model):
     opencart_webhookurl = fields.Char(string="Webhook URL", compute='_compute_opencart_webhookurl', store=False)
     api_username = fields.Char(string="API Name")
     api_key = fields.Text(string="API Key")
-    
+
     pricelist_ids = fields.Many2many('product.pricelist', string='Pricelists', store=True)
 
     def _compute_opencart_webhookurl(self):
@@ -68,12 +68,13 @@ class UnicodingMarketplace(models.Model):
             if len(pricelist_ids):
                 result = opencart_id.opencart_request(
                     "%s/index.php?route=api/integrations/syncpricelist" % (opencart_id.url),
-                    {'api_token': opencart_id._access_token, 'token': opencart_id._access_token, 'pricelist_ids': pricelist_ids})
+                    {'api_token': opencart_id._access_token, 'token': opencart_id._access_token,
+                     'pricelist_ids': pricelist_ids})
                 if result:
                     return result
             else:
                 return {}
-                
+
     def opencart_get_orders(self):
         for opencart_id in self:
             result = opencart_id.opencart_request("%s/index.php?route=api/integrations/orders" % (opencart_id.url),
@@ -187,11 +188,11 @@ class UnicodingMarketplace(models.Model):
                                              subject=_('Issue with Connection'))
 
             except Exception as e:
-                if response: 
+                if response:
                     _logger.info(response.text)
-                    #opencart_id.message_post(body=_('Failed <%s> %s ') % (url, str(e)), subject=_('Issue with connection'))
+                    # opencart_id.message_post(body=_('Failed <%s> %s ') % (url, str(e)), subject=_('Issue with connection'))
                     opencart_id.message_post(body=response.text,
-                                            subject=_('Content'))
+                                             subject=_('Content'))
                 opencart_id.message_post(body=_('Check url "%s" for correct JSON') % (url + '&' + urlencode(params)),
                                          subject=_('Issue with connection'))
             return False
@@ -222,13 +223,13 @@ class UnicodingMarketplace(models.Model):
                 })
 
             return coupon_id.product_variant_id
+
     def action_opencart_send_pricelists(self):
         for opencart_id in self:
             if opencart_id.type != "opencart":
                 return False
 
             opencart_id.opencart_get_token()
-
 
             try:
                 # _logger.info(product_tmpl_ids.ids)
@@ -315,8 +316,10 @@ class UnicodingMarketplace(models.Model):
 
             added_amount = 0
             updated_amount = 0
-            
-            pricelist_id = ProductPricelist.search([('id', 'in', opencart_id.default_pricelist_ids.ids), ('currency_id', '=', opencart_id.currency_id.id)], limit=1)
+
+            pricelist_id = ProductPricelist.search(
+                [('id', 'in', opencart_id.default_pricelist_ids.ids), ('currency_id', '=', opencart_id.currency_id.id)],
+                limit=1)
             if not pricelist_id:
                 pricelist_id = opencart_id.default_pricelist_ids[0].id
 
@@ -720,11 +723,12 @@ class UnicodingMarketplace(models.Model):
             parent_ids = ProductCategory.search(
                 [('unicoding_marketplace_id.id', '=', opencart_id.id)], order="unicoding_marketplace_updated_date ASC",
                 limit=opencart_id.category_batch_num)
-           
+
             for parent_id in parent_ids or [opencart_id.parent_default_categ_id]:
 
-                objects = opencart_id.opencart_get_categories(0 if parent_id.id == opencart_id.parent_default_categ_id.id else parent_id.opencartid)
-                
+                objects = opencart_id.opencart_get_categories(
+                    0 if parent_id.id == opencart_id.parent_default_categ_id.id else parent_id.opencartid)
+
                 parent_id.unicoding_marketplace_updated_date = datetime.now()
 
                 cats_name = []
@@ -956,7 +960,6 @@ class UnicodingMarketplace(models.Model):
                 else:
                     state_id = False
 
-
                 company_type = 'person'
 
                 if not partner_id:
@@ -1019,7 +1022,8 @@ class UnicodingMarketplace(models.Model):
                 # products add
 
                 productpricelist_id = ProductPricelist.search(
-                    [('currency_id', '=', from_currency_id.id), ('id', 'in', opencart_id.default_pricelist_ids.ids)], limit=1)
+                    [('currency_id', '=', from_currency_id.id), ('id', 'in', opencart_id.default_pricelist_ids.ids)],
+                    limit=1)
                 if not productpricelist_id:
                     productpricelist_id = ProductPricelist.create({
                         'name': from_currency_id.name,
@@ -1091,9 +1095,10 @@ class UnicodingMarketplace(models.Model):
 
                     if default_code:
                         product_tmpl_id = ProductTemplate.search(
-                            ["&", ('default_code', '=', default_code), "|", ('company_id', '=', opencart_id.company_id.id),
+                            ["&", ('default_code', '=', default_code), "|",
+                             ('company_id', '=', opencart_id.company_id.id),
                              ("company_id", "=", False)]
-                        )    
+                        )
 
                     if not product_tmpl_id:
                         product_tmpl_id = ProductTemplate.search(
@@ -1332,9 +1337,9 @@ class UnicodingMarketplace(models.Model):
                         if total['code'] == 'shipping':
                             delivery_carrier_id = self.env['delivery.carrier'].search(
                                 [('name', '=', total['title']), ('delivery_type', '=', 'fixed')])
-                            
+
                             if not delivery_carrier_id:
-                                 
+
                                 value_dict = {
                                     'name': total['title'],
                                     'type': 'service',
@@ -1358,7 +1363,7 @@ class UnicodingMarketplace(models.Model):
                             # if found carreir
                             if delivery_carrier_id:
                                 # print(delivery_carrier_id)
-                                  
+
                                 if total_tax_ids:
                                     delivery_carrier_id.product_id.write({
                                         'taxes_id': [(6, 0, total_tax_ids)]
@@ -1447,12 +1452,13 @@ class UnicodingMarketplace(models.Model):
                     saleorder_id.with_context(no_send_status_update=True)._action_cancel()
                 # except Exception as e:
                 #    opencart_id.message_post(body=_('Failed to add order %s' % str(e)), subject=_('Opencart order import failed'))
-               
+
                 for history in order['histories'] if order["histories"] else []:
                     saleorder_id.message_post(body=_(
-                        "Opencart Date %s, State %s, Comment: %s." % (history['date_added'], history['status'], history['comment'])
+                        "Opencart Date %s, State %s, Comment: %s." % (
+                        history['date_added'], history['status'], history['comment'])
                     ))
 
                 self.env.cr.commit()
-                
+
             opencart_id.message_post(body=_('Added orders: %s' % str(orders_amount)), subject=_('OpenCart sync status'))
