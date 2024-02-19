@@ -1,0 +1,9 @@
+
+<odoo>
+    <menuitem id="menu_isp_integrations_opencart_to_marketplace_products"
+              name="Public category"
+              parent="unicoding_marketplace.menu_unicoding_marketplace_stock"
+              action="isp_product_public_category_form_action"
+              sequence="211"
+    />
+</odoo>

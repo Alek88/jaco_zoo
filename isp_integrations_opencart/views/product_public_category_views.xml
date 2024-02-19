@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+      <record id="isp_product_public_category_views" model="ir.ui.view">
+          <field name="name">isp.product.public.category.views</field>
+          <field name="model">product.public.category</field>
+          <field name="inherit_id" ref="website_sale.product_public_category_form_view" />
+          <field name="priority" eval="3"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='sequence']" position="after">
+                  <field name="unicoding_marketplace_id"/>
+                  <field name="opencartid"/>
+                  <field name="opencart_url"/>
+                  <field name="is_change"/>
+              </xpath>
+          </field>
+      </record>
+
+       <record id="isp_product_public_category_form_action" model="ir.actions.act_window">
+            <field name="name">Public Category</field>
+            <field name="res_model">product.public.category</field>
+            <field name="view_id" ref="website_sale.product_public_category_tree_view"/>
+            <field name="view_mode">tree,kanban,form</field>
+           <field name="domain">[('unicoding_marketplace_id', '!=', False)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    List is empty
+                </p>
+            </field>
+       </record>
+
+  </data>
+</odoo>
+
+
+

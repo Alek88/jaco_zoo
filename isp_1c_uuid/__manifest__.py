@@ -26,7 +26,7 @@
 
     'category': 'Uncategorized',
     'version': '16.0.0.0.1',
-
+    "license": "OPL-1",
     'depends': ['base', 'stock', 'sale', 'account'],
 
     'data': [

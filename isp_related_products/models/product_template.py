@@ -152,12 +152,15 @@ class RelatedProductTemplate(models.Model):
 
     @api.model
     def create(self, vals):
-        related_product_ids = vals['its_related_product_ids'][0][2]
         record = super(RelatedProductTemplate, self).create(vals)
-        object_id = record.id
-        for related_product_id in related_product_ids:
-            add_prod = self.get_product(related_product_id)
-            add_related_product_val = add_prod.its_related_product_ids.ids
-            add_related_product_val.append(object_id)
-            self.change_product(add_prod, add_related_product_val)
+        try:
+            related_product_ids = vals['its_related_product_ids'][0][2]
+            object_id = record.id
+            for related_product_id in related_product_ids:
+                add_prod = self.get_product(related_product_id)
+                add_related_product_val = add_prod.its_related_product_ids.ids
+                add_related_product_val.append(object_id)
+                self.change_product(add_prod, add_related_product_val)
+        except Exception:
+            pass
         return record

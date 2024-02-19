@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="isp_integrations_opencart_views" model="ir.ui.view">
+            <field name="name">isp_integrations_opencart_views</field>
+            <field name="model">unicoding.marketplace</field>
+            <field name="inherit_id" ref="unicoding_marketplace.unicoding_marketplace_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="opencart_export_public_categories" string="EXPORT PUBLIC CATEGORIES" type="object"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

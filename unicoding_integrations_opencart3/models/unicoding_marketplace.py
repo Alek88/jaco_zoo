@@ -15,6 +15,7 @@ import threading
 from urllib.parse import urlencode
 
 
+
 class UnicodingMarketplace(models.Model):
     _inherit = 'unicoding.marketplace'
     _access_token = fields.Char(string="access_token")
